@@ -1,0 +1,83 @@
+Using templates in Go
+1 Oct 2016
+
+Loh Siu Yin
+Technology Consultant, Beyond Broadcast LLP
+siuyin@beyondbroadcast.com
+
+* Templates with string and struct data
+Use with a string:
+.play tstring.go /STR_S/,/STR_E/
+
+Use with a struct:
+.play -numbers tstruct.go /STR_S/,/STR_E/
+Line 12: Try (re)moving the '-'. 
+Line 16: How will templates handle non-string values? Press *run* to find out.
+
+* Templates with map data
+Use with a map:
+.play -numbers tmap.go /MP_S/,/MP_E/
+Line 10: Try replacing .salut with .Salut .
+
+Line 13: We have a very flexible map indeed.
+Try replacing the int *3* with:
+1. [2]int{1,2} 
+
+2. 2 + 3
+
+3. func(i float32) float32 { return i*2 }(2.3)
+
+* Templates with functions passed in
+.play -numbers tfunc.go /F_S/,/F_E/
+Line 11: built in template printf call with 3 arguments. 
+
+Line 13: call to .time with zero arguments.
+
+Line 14: call to .toffset with one argument.
+
+Line 20: Try changing offset in the incoming data to another value.
+
+
+* Conditional templating
+.play -numbers tif.go /IF_S/,/IF_E/
+Try replacing the struct with nil .
+
+* Template iterations
+.play -numbers trange.go /R_S/,/R_E/
+Line 16: What do you think will be displayed for the "" entry? -- no data -- ?
+
+* Template ranging over channel
+.code -numbers trch.go /R_S/,/R_E/
+.play -numbers trch.go /S_S/,/S_E/
+Line 17: Comment out the close, then *run*. What do you think will happen?
+
+* Composing Templates
+template A followed by template B:
+.play -numbers tcafb.go /S/,/E/
+Line 13: Templates "a" and "b" are both at the top level. Thus they have access to the whole of the data (aVal and bVal) passed in in Line 15.
+
+* Composing Templates (2)
+A enclosing B:
+.play -numbers tcaeb.go /S/,/E/
+Line 14: Template A is called with all of the data (".").
+
+Lines 11 and 13: Templates A and B are defined respectively.
+A's definition can reference aVal and "." because A was called with ".".
+B's definition can access bVal because it was passed "." from A's definition.
+
+Try changing the "." in the B template call on Line 12 to .bVal.
+How do you make the template work again?
+Which is more flexible?
+
+* Defining templates from the filesystem
+tplA.tpl:
+.code tplA.tpl
+
+tplB.tpl:
+.code tplB.tpl
+
+tplAB.tpl:
+.code tplAB.tpl
+
+.play -numbers tfs.go /FS_S/,/FS_E/
+Line 14: Experiment with different template names and data values.
