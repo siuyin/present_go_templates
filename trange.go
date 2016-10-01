@@ -7,8 +7,9 @@ import (
 
 func main() {
 	// R_S OMIT
-	t := template.Must(template.New("hello").Parse(`{{range .Dat -}}
-Displaying {{ . }}.
+	t := template.Must(template.New("hello").Parse(`{{len .Dat}} items.
+{{range $i,$val := .Dat -}}
+	Displaying {{ $i }}: {{ $val }} | {{ . }}.
 {{ else -}}
 -- no data --
 {{- end }}

@@ -42,9 +42,13 @@ Line 20: Try changing offset in the incoming data to another value.
 .play -numbers tif.go /IF_S/,/IF_E/
 Try replacing the struct with nil .
 
-* Template iterations
+* Template iterations and variables
 .play -numbers trange.go /R_S/,/R_E/
-Line 16: What do you think will be displayed for the "" entry? -- no data -- ?
+Line 10: *len* is a template built-in function.
+
+Line 11: *range* can _optionally_ assign variables. As seen in Line 12, $val is available as {{ . }} .
+
+Line 17: What do you think will be displayed for the '' entry? -- no data -- ?
 
 * Template ranging over channel
 .code -numbers trch.go /R_S/,/R_E/
