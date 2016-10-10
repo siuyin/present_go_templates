@@ -1,2 +1,4 @@
-{{ template "tplA.tpl" .aVal -}}
-{{ template "tplB.tpl" .bVal -}}
+{{- define "tplAB" -}}
+{{ template "tplA" .aVal -}}
+{{ template "tplB" .bVal -}}
+{{- end -}}

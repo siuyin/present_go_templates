@@ -6,16 +6,16 @@ Technology Consultant, Beyond Broadcast LLP
 siuyin@beyondbroadcast.com
 
 * Templates with string and struct data
-Use with a string:
+Use with a string (tstring.go):
 .play tstring.go /STR_S/,/STR_E/
 
-Use with a struct:
+Use with a struct (tstruct.go):
 .play -numbers tstruct.go /STR_S/,/STR_E/
 Line 12: Try (re)moving the '-'. 
 Line 16: How will templates handle non-string values? Press *run* to find out.
 
 * Templates with map data
-Use with a map:
+Use with a map (tmap.go):
 .play -numbers tmap.go /MP_S/,/MP_E/
 Line 10: Try replacing .salut with .Salut .
 
@@ -28,21 +28,21 @@ Try replacing the int *3* with:
 3. func(i float32) float32 { return i*2 }(2.3)
 
 * Templates with functions passed in
+tfunc.go:
 .play -numbers tfunc.go /F_S/,/F_E/
 Line 11: built in template printf call with 3 arguments. 
-
 Line 13: call to .time with zero arguments.
-
 Line 14: call to .toffset with one argument.
-
 Line 20: Try changing offset in the incoming data to another value.
 
 
 * Conditional templating
+tif.go:
 .play -numbers tif.go /IF_S/,/IF_E/
 Try replacing the struct with nil .
 
 * Template iterations and variables
+trange.go:
 .play -numbers trange.go /R_S/,/R_E/
 Line 10: *len* is a template built-in function.
 
@@ -51,17 +51,18 @@ Line 11: *range* can _optionally_ assign variables. As seen in Line 12, $val is 
 Line 17: What do you think will be displayed for the '' entry? -- no data -- ?
 
 * Template ranging over channel
+trch.go:
 .code -numbers trch.go /R_S/,/R_E/
 .play -numbers trch.go /S_S/,/S_E/
 Line 17: Comment out the close, then *run*. What do you think will happen?
 
 * Composing Templates
-template A followed by template B:
+template A followed by template B (tcafb.go):
 .play -numbers tcafb.go /S/,/E/
 Line 13: Templates "a" and "b" are both at the top level. Thus they have access to the whole of the data (aVal and bVal) passed in in Line 15.
 
 * Composing Templates (2)
-A enclosing B:
+A enclosing B (tcaeb.go):
 .play -numbers tcaeb.go /S/,/E/
 Line 14: Template A is called with all of the data (".").
 
@@ -73,6 +74,7 @@ Try changing the "." in the B template call on Line 12 to .bVal.
 How do you make the template work again?
 Which is more flexible?
 
+
 * Defining templates from the filesystem
 tplA.tpl:
 .code tplA.tpl
@@ -80,8 +82,37 @@ tplA.tpl:
 tplB.tpl:
 .code tplB.tpl
 
+Note the define statements -- these name the templates.
+They would otherwise be named "tplA.tpl" and "tplB.tpl" .
+
+* Template A followed by B
 tplAB.tpl:
 .code tplAB.tpl
 
 .play -numbers tfs.go /FS_S/,/FS_E/
 Line 14: Experiment with different template names and data values.
+
+* HTML Layouts
+html/tpl/layout.html:
+.code -numbers html/tpl/layout.html
+Line 6: *yield* is a user-defined template function which will insert the partial below.
+
+html/tpl/index/home.html:
+.code -numbers html/tpl/index/home.html
+
+* Parsing templates
+htmlTpl.go:
+.code -numbers htmlTpl.go /LAY_S/,/LAY_E/
+Line 22: "index/home" and other templates under /home/tpl are parsed.
+
+* Rendering index/home with the layout
+htmlTpl.go:
+.code -numbers htmlTpl.go /RDR_S/,/RDR_E/
+
+* RenderTemplate call
+htmlTpl.go:
+.play -numbers htmlTpl.go /CALL_S/,/CALL_E/
+Line 52: try changing template name to index/homey -- this should throw an undefined template error.
+
+Line 54: try inserting <script>alert('boom!')</script> for "myMainBody" to test script injection protection.
+
