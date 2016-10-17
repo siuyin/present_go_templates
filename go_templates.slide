@@ -92,6 +92,8 @@ tplAB.tpl:
 .play -numbers tfs.go /FS_S/,/FS_E/
 Line 14: Experiment with different template names and data values.
 
+* HTML Templates
+
 * HTML Layouts
 html/tpl/layout.html:
 .code -numbers html/tpl/layout.html
@@ -103,7 +105,7 @@ html/tpl/index/home.html:
 * Parsing templates
 htmlTpl.go:
 .code -numbers htmlTpl.go /LAY_S/,/LAY_E/
-Line 22: "index/home" and other templates under /home/tpl are parsed.
+Line 22: "index/home" and other templates under /html/tpl are parsed.
 
 * Rendering index/home with the layout
 htmlTpl.go:
