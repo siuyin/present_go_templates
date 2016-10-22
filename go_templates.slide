@@ -66,15 +66,13 @@ Line 14: Templates "a" and "b" have access to the data (aStuff and bStuff) passe
 * Composing Templates (2)
 A enclosing B (tcaeb.go):
 .play -edit -numbers tcaeb.go /tS/,/tE/
-Line 14: Template A is called with all of the data (".").
+Line 15: Template A is called with all of the data (".").
 
 Lines 11 and 13: Templates A and B are defined respectively.
-A's definition can reference aVal and "." because A was called with ".".
-B's definition can access bVal because it was passed "." from A's definition.
+A's definition can reference aVal and bStuff because A was called with ".".
+B's definition can access bVal because it was passed bStuff from A's definition.
 
-Try changing the "." in the B template call on Line 12 to .bVal.
-How do you make the template work again?
-Which is more flexible?
+Try changing the ".bVal" in the B template call on Line 13 to ".".
 
 * Composing Templates (3) -- layouts
 
