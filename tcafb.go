@@ -6,12 +6,16 @@ import (
 )
 
 func main() {
-	// S OMIT
+	// tS OMIT
 	t := template.Must(template.New("ab").Parse(
-		`{{define "a"}}I am A for "{{ . }}".{{end}}
-{{- define "b"}}I am B for "{{ . }}".{{end}}
-{{- template "a" .aVal }} {{template "b" .bVal }}
+		`{{define "a"}}I am A for "{{ .aVal }}".{{end}}
+		{{- define "b"}}I am B for "{{ .bVal }}" and "{{ .b2 }}".{{end}}
+
+		{{- template "a" .aStuff }} {{template "b" .bStuff }}
 `))
-	t.Execute(os.Stdout, map[string]string{"aVal": "apple", "bVal": "boy"})
-	// E OMIT
+	t.Execute(os.Stdout, map[string]interface{}{
+		"aStuff": map[string]string{"aVal": "apple"},
+		"bStuff": map[string]string{"bVal": "boy", "b2": "bat"},
+	})
+	// tE OMIT
 }
