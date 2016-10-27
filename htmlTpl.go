@@ -24,11 +24,11 @@ var myTemplates = template.Must(template.New("").ParseGlob("html/tpl/**/*.html")
 // LAY_E OMIT
 
 // RDR_S OMIT
-/* This demo of RenderTemplate just renders to os.Stdout.
- * It would typically write to w of w http.ResponseWriter
- * and perhaps augment data from r of r http.Request
- * thus: RenderTemplate(w http.ResponseWriter, r http.Request, name string, data interface{})
- */
+
+// RenderTemplate This demo of RenderTemplate just renders to os.Stdout.
+// It would typically write to w of w http.ResponseWriter
+// and perhaps augment data from r of r http.Request
+// thus: RenderTemplate(w http.ResponseWriter, r http.Request, name string, data interface{})
 func RenderTemplate(name string, data interface{}) {
 	funcs := template.FuncMap{
 		"yield": func() (template.HTML, error) {

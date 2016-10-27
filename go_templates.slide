@@ -1,11 +1,13 @@
 Using templates in Go
-18 Oct 2016
+1 Oct 2016
 
 Loh Siu Yin
 Technology Consultant, Beyond Broadcast LLP
 siuyin@beyondbroadcast.com
 
 * Templates with string and struct data
+: Main Point -- how to ignore whitespace.
+: Secondary the template variable must be uppercase because struct public starts Uppercase.
 Use with a string (tstring.go):
 .play -edit string/tstring.go /STR_S/,/STR_E/
 
@@ -15,6 +17,8 @@ Line 12: Try (re)moving the '-'.
 Line 16: How will templates handle non-string values? Press *run* to find out.
 
 * Templates with map data
+: Maps don't need upper-casing
+: Map of string to interface{}!
 Use with a map (tmap.go):
 .play -edit -numbers map/tmap.go /MP_S/,/MP_E/
 Line 10: Try replacing .salut with .Salut .
@@ -28,6 +32,7 @@ Try replacing the int *3* with:
 3. func(i float32) float32 { return i*2 }(2.3)
 
 * Templates with functions passed in
+: printf and other functions in templates FuncMap does not need the call command. I will show you how to define your own template functions later.
 tfunc.go:
 .play -edit -numbers func/tfunc.go /F_S/,/F_E/
 Line 11: built in template printf call with 3 arguments.
@@ -37,6 +42,7 @@ Line 20: Try changing offset in the incoming data to another value.
 
 
 * Conditional templating
+: "", and nil evaluate to false
 tif.go:
 .play -edit -numbers if/tif.go /IF_S/,/IF_E/
 Try replacing the struct with nil .
@@ -56,9 +62,10 @@ trch.go:
 .play -edit -numbers -edit chan/trch.go /S_S/,/S_E/
 Line 17: Comment out the close, then *run*. What do you think will happen?
 
-: Lines starting with a colon are presenter notes.
+: I don't quite know how to use this properly.
 
 * Composing Templates
+: Main point -- template definition and template execution.
 template A followed by template B (tcafb.go):
 .play -edit -numbers comp/ab/tcab.go /tS/,/tE/
 Line 14: Templates "a" and "b" have access to the data (aStuff and bStuff) passed in in Line 16.
@@ -75,7 +82,8 @@ B's definition can access bVal because it was passed bStuff from A's definition.
 Try changing the ".bVal" in the B template call on Line 13 to ".".
 
 * Composing Templates (3) -- layouts
-
+: layouts need FuncMap help.
+: May be possible to use call syntax.
 Say you have a form letter:
 
 .code layout/main.go /layS/,/layE/
@@ -116,6 +124,7 @@ Note the define statements -- these name the templates.
 They would otherwise be named "tplA.tpl" and "tplB.tpl" .
 
 * Template A followed by B
+: Main point - difference between Execute and ExecuteTemplate
 tplAB.tpl:
 .code fs/tplAB.tpl
 
@@ -149,4 +158,5 @@ Line 52: try changing template name to index/homey -- this should throw an undef
 Line 54: try inserting <script>alert('boom!')</script> for "myMainBody" to test script injection protection.
 
 * Getting the slide presentation and code
+
 .link https://github.com/siuyin/present_go_templates
