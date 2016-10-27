@@ -31,11 +31,13 @@ var myTemplates = template.Must(template.New("").ParseGlob("html/tpl/**/*.html")
 // thus: RenderTemplate(w http.ResponseWriter, r http.Request, name string, data interface{})
 func RenderTemplate(name string, data interface{}) {
 	funcs := template.FuncMap{
+		// 100 OMIT
 		"yield": func() (template.HTML, error) {
 			buf := &bytes.Buffer{}
 			err := myTemplates.ExecuteTemplate(buf, name, data)
 			return template.HTML(buf.String()), err // treats buf string as trusted HTML // HL
 		},
+		// 200 OMIT
 	}
 	layoutClone, _ := layout.Clone() // Work on clone of layout to ensure
 	layoutClone.Funcs(funcs)         // goroutines do not step on each other.

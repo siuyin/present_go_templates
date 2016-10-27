@@ -149,8 +149,11 @@ htmlTpl.go:
 Line 22: "index/home" and other templates under /html/tpl are parsed.
 
 * Rendering index/home with the layout
-htmlTpl.go:
-.code -numbers htmlTpl.go /RDR_S/,/RDR_E/
+index/home.html:
+.code html/tpl/index/home.html
+
+Render function -- replaces yield function in layout with template output.
+.code -numbers  htmlTpl.go /100 OMIT/,/200 OMIT/
 
 * RenderTemplate call
 htmlTpl.go:
