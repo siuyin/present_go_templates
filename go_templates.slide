@@ -112,6 +112,8 @@ Lines 17-19: Note we are replacing the FuncMap for _layout_ with a new one that 
 Line 22: Execute the _layout_ and send the output to the io.Writer.
 
 .play -edit layout/main.go /mnS/,/mnE/
+: Change "gn" to "bn"
+: more on Execute and Execute template next two slides.
 
 * Defining templates from the filesystem
 tplA.tpl:
