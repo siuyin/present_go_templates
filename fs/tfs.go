@@ -7,7 +7,7 @@ import (
 
 func main() {
 	// FS_S OMIT
-	t := template.Must(template.New("tplAB").ParseGlob("*.tpl"))
+	t := template.Must(template.New("tplAB").ParseGlob("fs/*.tpl"))
 	m := map[string]interface{}{"aVal": "apple",
 		"bVal": "boy"}
 	t.Execute(os.Stdout, m)

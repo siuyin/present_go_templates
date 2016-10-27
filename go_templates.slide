@@ -7,16 +7,16 @@ siuyin@beyondbroadcast.com
 
 * Templates with string and struct data
 Use with a string (tstring.go):
-.play -edit tstring.go /STR_S/,/STR_E/
+.play -edit string/tstring.go /STR_S/,/STR_E/
 
 Use with a struct (tstruct.go):
-.play -numbers -edit tstruct.go /STR_S/,/STR_E/
+.play -numbers -edit struct/tstruct.go /STR_S/,/STR_E/
 Line 12: Try (re)moving the '-'.
 Line 16: How will templates handle non-string values? Press *run* to find out.
 
 * Templates with map data
 Use with a map (tmap.go):
-.play -edit -numbers tmap.go /MP_S/,/MP_E/
+.play -edit -numbers map/tmap.go /MP_S/,/MP_E/
 Line 10: Try replacing .salut with .Salut .
 
 Line 13: We have a very flexible map indeed.
@@ -29,7 +29,7 @@ Try replacing the int *3* with:
 
 * Templates with functions passed in
 tfunc.go:
-.play -edit -numbers tfunc.go /F_S/,/F_E/
+.play -edit -numbers func/tfunc.go /F_S/,/F_E/
 Line 11: built in template printf call with 3 arguments.
 Line 13: call to .time with zero arguments.
 Line 14: call to .toffset with one argument.
@@ -38,12 +38,12 @@ Line 20: Try changing offset in the incoming data to another value.
 
 * Conditional templating
 tif.go:
-.play -edit -numbers tif.go /IF_S/,/IF_E/
+.play -edit -numbers if/tif.go /IF_S/,/IF_E/
 Try replacing the struct with nil .
 
 * Template iterations and variables
 trange.go:
-.play -edit -numbers trange.go /R_S/,/R_E/
+.play -edit -numbers range/trange.go /R_S/,/R_E/
 Line 10: *len* is a template built-in function.
 
 Line 11: *range* can _optionally_ assign variables. As seen in Line 12, $val is available as {{ . }} .
@@ -52,20 +52,20 @@ Line 17: What do you think will be displayed for the '' entry? -- no data -- ?
 
 * Template ranging over channel
 trch.go:
-.code -numbers trch.go /R_S/,/R_E/
-.play -edit -numbers -edit trch.go /S_S/,/S_E/
+.code -numbers chan/trch.go /R_S/,/R_E/
+.play -edit -numbers -edit chan/trch.go /S_S/,/S_E/
 Line 17: Comment out the close, then *run*. What do you think will happen?
 
 : Lines starting with a colon are presenter notes.
 
 * Composing Templates
 template A followed by template B (tcafb.go):
-.play -edit -numbers tcafb.go /tS/,/tE/
+.play -edit -numbers comp/ab/tcab.go /tS/,/tE/
 Line 14: Templates "a" and "b" have access to the data (aStuff and bStuff) passed in in Line 16.
 
 * Composing Templates (2)
 A enclosing B (tcaeb.go):
-.play -edit -numbers tcaeb.go /tS/,/tE/
+.play -edit -numbers comp/aeb/tcaeb.go /tS/,/tE/
 Line 15: Template A is called with all of the data (".").
 
 Lines 11 and 13: Templates A and B are defined respectively.
@@ -107,19 +107,19 @@ Line 22: Execute the _layout_ and send the output to the io.Writer.
 
 * Defining templates from the filesystem
 tplA.tpl:
-.code tplA.tpl
+.code fs/tplA.tpl
 
 tplB.tpl:
-.code tplB.tpl
+.code fs/tplB.tpl
 
 Note the define statements -- these name the templates.
 They would otherwise be named "tplA.tpl" and "tplB.tpl" .
 
 * Template A followed by B
 tplAB.tpl:
-.code tplAB.tpl
+.code fs/tplAB.tpl
 
-.play -edit -numbers tfs.go /FS_S/,/FS_E/
+.play -edit -numbers fs/tfs.go /FS_S/,/FS_E/
 Line 14: Experiment with different template names and data values.
 
 * HTML Templates
